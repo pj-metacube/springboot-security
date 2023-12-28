@@ -2,10 +2,13 @@ package com.metacube.springsecurity.SpringSecurity.service;
 
 import com.metacube.springsecurity.SpringSecurity.entity.AppUser;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginUser implements UserDetails {
     final private AppUser appUser;
@@ -16,7 +19,8 @@ public class LoginUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        return Arrays.stream(appUser.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override

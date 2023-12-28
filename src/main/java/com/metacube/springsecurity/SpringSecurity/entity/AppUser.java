@@ -18,4 +18,5 @@ public class AppUser {
     Integer id;
     String userName;
     String password;
+    String roles;
 }
