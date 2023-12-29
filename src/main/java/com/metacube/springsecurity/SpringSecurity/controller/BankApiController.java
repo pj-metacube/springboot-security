@@ -15,4 +15,11 @@ public class BankApiController {
         return "Your acc balance is: Rs.223082.21";
     }
 
+
+    @GetMapping("/get-account")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String printHellocc() {
+        return "Your acc balance is: Rs.223082.21";
+    }
+
 }
